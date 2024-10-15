@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <image> </image>
+    <title>Login - SmartBite</title>
+
+</head>
+<body>
+<h1>Welcome to</h1>
+<img src="../images/Logo.png" height="433" width="548"/>
+<h2>Login </h2>
+
+
+<form method="POST" action="/api/users/login">
+    <label for="username">Benutzername:</label>
+    <input type="text" id="username" name="username" />
+
+    <label for="password">Passwort:</label>
+    <input type="password" id="password" name="password" />
+
+    <button type="submit">Login</button>
+    <a href="/oauth2/authorization/google">Mit Google anmelden</a>
+
+</form>
+
+</body>
+</html>

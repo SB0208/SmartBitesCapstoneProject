@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <title>Empfehlungen - SmartBite</title>
+</head>
+<body>
+<h1>Ernährungsempfehlungen</h1>
+<form method="GET" action="/api/nutrition/recommendation">
+    <label for="calories">Tägliches Kalorienziel:</label>
+    <input type="number" id="calories" name="calorieGoal" />
+    <button type="submit">Empfehlungen anzeigen</button>
+</form>
+
+<p text="${recommendation}"></p>
+
+</body>
+</html>
