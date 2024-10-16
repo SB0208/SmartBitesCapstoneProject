@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 public class AIService {
     private static final String OPENAI_API_URL = "https://api.openapi.models.com/2.0/";
-    private static final String API_KEY = "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";
+    private static final String API_KEY ="${AI_KEY}";
 
 
     public String generateMealSuggestions(String prompt){
