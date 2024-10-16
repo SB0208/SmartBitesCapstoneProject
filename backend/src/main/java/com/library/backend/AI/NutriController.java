@@ -15,3 +15,4 @@ public class NutriController {
         return nutritionAIService.generateMealRecommendation(calorieGoal);
     }
 }
+
