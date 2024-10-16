@@ -1,5 +1,4 @@
-package com.library.backend.controller;
-import com.library.backend.service.NutritionAIService;
+package com.library.backend.AI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

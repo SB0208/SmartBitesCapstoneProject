@@ -1,4 +1,4 @@
-package com.library.backend.service;
+package com.library.backend.AI;
 import org.springframework.stereotype.Service;
 @Service
 
