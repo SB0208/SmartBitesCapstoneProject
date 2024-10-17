@@ -16,7 +16,7 @@ public class AIController {
         this.aiService = aiService;
     }
 
-    @GetMapping("/api/suggest-meal")
+    @GetMapping()
     public String suggestMeal(@RequestParam String input){
         return aiService.generateMealSuggestions(input);
     }
