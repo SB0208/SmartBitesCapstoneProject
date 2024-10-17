@@ -7,13 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
+@RequestMapping("/api/users")
 
 
 
 public class UserController {
 
-    private final UserService userService;
+    private UserService userService;
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
