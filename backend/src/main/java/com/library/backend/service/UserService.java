@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 @Service
 
-public final class UserService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -73,5 +73,10 @@ public final class UserService {
         }
         return (UserDetails) user;
 
+    }
+
+    public User registerUser(User user) {
+        User userSaved = userRepository.save(user);
+        return userSaved;
     }
 }
