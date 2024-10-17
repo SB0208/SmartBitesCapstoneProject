@@ -14,12 +14,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/login**", "/error**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .oauth2Login()
-                .defaultSuccessUrl("/dashboard", true)
-                .failureUrl("/login?error=true");
+                .requestMatchers("/path1", "/path2", "/path3").permitAll();
+
 
         return http.build();
     }

@@ -29,7 +29,7 @@ class AIControllerTest {
 
     @Test
     void suggestMeal() throws Exception {
-        when (nutritionAIService.generateMealRecommendation("healthy")).thenReturn("Salad");
+        when (nutritionAIService.generateMealRecommendation(1500)).thenReturn("Salad");
         mockMvc.perform(get("/api/v1/meals/healthy"))
                 .andExpect(status().isOk());
 
