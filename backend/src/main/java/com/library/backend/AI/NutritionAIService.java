@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 public class NutritionAIService {
 
-    public String generateMealRecommendation(int calorieGoal) {
+    public String generateMealRecommendation(String calorieGoal) {
         if (calorieGoal < 1500) {
             return "Recommended Meal: Salad,Chicken Breast,Quinoa " + calorieGoal;
         } else if (calorieGoal < 2000) {
