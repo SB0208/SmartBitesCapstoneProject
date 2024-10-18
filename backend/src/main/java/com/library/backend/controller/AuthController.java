@@ -1,33 +1,26 @@
 package com.library.backend.controller;
-
-import com.library.backend.model.SignUpRequest;
 import com.library.backend.model.User;
-import com.library.backend.service.UserService;
-import com.library.backend.service.AuthService;
+import com.library.backend.service.UserSrvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private UserSrvice userSrvice;
 
-    @Autowired
-    private AuthService authService;
-
-    // Registrierungs-Endpoint
     @PostMapping("/signup")
-    public String signUp(@RequestBody SignUpRequest signUpRequest) {
-        userService.registerUser(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
-        return "Benutzer erfolgreich registriert!";
+    public User signup(@RequestBody User user) {
+        return userSrvice.registerUser(user.getUsername(),user.getEmail(),user.getPassword());
     }
 
-    // Login-Endpoint
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        return authService.login(email, password);  // JWT-Token zurückgeben
+    public Optional<User> login(@RequestBody User user) {
+        return userSrvice.loginUser(user.getEmail(),user.getPassword());
     }
+
+
 }
