@@ -2,23 +2,30 @@ package com.library.backend.controller;
 import com.library.backend.model.User;
 import com.library.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @RestController
-
+@RequestMapping("/api/users")
 
 public class UserController {
     @Autowired
     private UserService userService;
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.registerUser(user);
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
+        userService.registerUser(user);
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/login")
-    public User login(@RequestParam String username, @RequestParam String password) {
-        return userService.loginUser(username, password);
+    public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
+        Optional<User> user = userService.loginUser(email, password);
+        if (user.isPresent()) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
     }
 }
