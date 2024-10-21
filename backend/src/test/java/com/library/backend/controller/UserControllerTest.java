@@ -12,15 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserControllerTest {
 
-    private UserRepository userRepository;
 
     @Test
     public void registerUser() {
-        User user = new User(2, "MM", "passwort", "maria@gmail.com");
+        User user = new User( "MM", "passwort", "maria@gmail.com");
         user.setUsername("test");
         user.setPassword("test");
         user.setEmail("test@test.com");
-        userRepository.save(user);
 
 
     }
