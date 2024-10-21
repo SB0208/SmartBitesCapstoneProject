@@ -1,7 +1,7 @@
 package com.library.backend.controller;
 import com.library.backend.model.Meal;
 import com.library.backend.service.MealService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +11,11 @@ import java.util.List;
 @RequestMapping("/api/meals")
 public class MealController {
 
-    @Autowired
+
     private MealService mealService;
+    public MealController(MealService mealService) {
+        this.mealService = mealService;
+    }
 
     @PostMapping("/log")
     public ResponseEntity<String> logMeal(@RequestBody Meal meal) {
