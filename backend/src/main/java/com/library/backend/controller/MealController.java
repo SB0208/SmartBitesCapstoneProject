@@ -2,6 +2,7 @@ package com.library.backend.controller;
 import com.library.backend.model.Meal;
 import com.library.backend.service.MealService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,20 +12,22 @@ import java.util.List;
 @RequestMapping("/api/meals")
 public class MealController {
 
-
     private MealService mealService;
     public MealController(MealService mealService) {
         this.mealService = mealService;
     }
 
-    @PostMapping("/log")
-    public ResponseEntity<String> logMeal(@RequestBody Meal meal) {
-        mealService.logMeal(meal);
-        return ResponseEntity.ok("Meal logged successfully");
+    @GetMapping()
+    public List<Meal> getAllMeals() {
+        List<Meal> meals = mealService.getAllMeals();
+        return meals;
     }
 
-    @GetMapping("/all")
-    public List<Meal> getAllMeals() {
-        return mealService.getAllMeals();
+    @PostMapping()
+    public ResponseEntity<String> saveMeal(@RequestBody Meal myMeal) {
+         mealService.saveMeal(myMeal);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Meal saved successfully");
     }
+
+
 }
