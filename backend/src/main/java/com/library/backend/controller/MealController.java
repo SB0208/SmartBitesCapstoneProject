@@ -10,24 +10,44 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/meals")
+
 public class MealController {
 
-    private MealService mealService;
+    private final MealService mealService;
     public MealController(MealService mealService) {
         this.mealService = mealService;
     }
 
-    @GetMapping()
-    public List<Meal> getAllMeals() {
-        List<Meal> meals = mealService.getAllMeals();
-        return meals;
+    @GetMapping
+    public ResponseEntity<List<Meal>> getAllMeals() {
+        return ResponseEntity.ok(mealService.getAllMeals());
     }
 
-    @PostMapping()
-    public ResponseEntity<String> saveMeal(@RequestBody Meal myMeal) {
-         mealService.saveMeal(myMeal);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Meal saved successfully");
+    @GetMapping("/{id}")
+     public ResponseEntity<Meal> getMealById(@PathVariable String id) {
+        Meal meal = mealService.getMealById(id);
+        return meal != null ? ResponseEntity.ok(meal) : ResponseEntity.notFound().build();
+
     }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<Meal>> getMealsByCategory(@PathVariable String category) {
+        return ResponseEntity.ok(mealService.getMealsByCategory(category));
+    }
+
+    @PostMapping
+    public ResponseEntity<Meal> createMeal(@RequestBody Meal meal) {
+        Meal createdMeal = mealService.createMeal(meal);
+        return ResponseEntity.ok(createdMeal);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMeal(@PathVariable String id) {
+        mealService.deleteMeal(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 
 }

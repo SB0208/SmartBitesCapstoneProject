@@ -11,28 +11,38 @@ import java.util.Optional;
 
 public class MealService {
 
-    private MealRepository mealRepository;
+    private final MealRepository mealRepository;
     public MealService(MealRepository mealRepository) {
         this.mealRepository = mealRepository;
     }
 
     public List<Meal> getAllMeals() {
+
         return mealRepository.findAll();
     }
 
-    public Optional<Meal> getMealById(String mealId) {
-        return mealRepository.findById(mealId);
 
+    public Meal getMealById(String id) {
+        return mealRepository.findById(id).orElse(null);
+    }
+
+    public List<Meal> getMealsByCategory(String category) {
+        return mealRepository.findByCategory(category);
+    }
+
+    public List<Meal> getMealsByType(String type) {
+        return mealRepository.findByType(type);
+    }
+
+    public Meal createMeal(Meal meal) {
+        return mealRepository.save(meal);
+    }
+
+    public void deleteMeal(String id) {
+        mealRepository.deleteById(id);
     }
 
 
-    public void addMeal(Meal meal) {
-        mealRepository.save(meal);
-    }
-
-    public void saveMeal(Meal meal) {
-        mealRepository.save(meal);
-    }
 
 
 

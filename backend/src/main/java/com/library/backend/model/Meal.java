@@ -1,91 +1,78 @@
 package com.library.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.LocalDateTime;
+
 
 @Document(collection ="meals")
 
 public class Meal {
     @Id
-    private String userId;
+    private String id;
     private String name;
-    private int calories;
-    private LocalDateTime dateTime;
+    private String description;
+    private String category;
+    private String type;
+    private String link;
 
-
-    public Meal(String userId, String name, int calories, LocalDateTime dateTime) {
-
-        this.userId = userId;
+    public Meal() {}
+   public Meal(String name, String description, String category, String type, String link) {
         this.name = name;
-        this.calories = calories;
-        this.dateTime = dateTime;
-    }
+        this.description = description;
+        this.category = category;
+        this.type = type;
+        this.link = link;
+   }
+   public String getId() {
+        return id;
+   }
 
+   public void setId(String id) {
+        this.id = id;
+   }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
+   public String getName() {
         return name;
-    }
+   }
 
-    public void setName(String name) {
+   public void setName(String name) {
         this.name = name;
-    }
+   }
 
-    public int getCalories() {
-        return calories;
-    }
+   public String getDescription() {
+        return description;
+   }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
+   public void setDescription(String description) {
+        this.description = description;
+   }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
+   public String getCategory() {
+        return category;
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
+   }
 
-    public Meal(){
-       this.name = "";
-       this.calories = 0;
-       this.dateTime = LocalDateTime.now();
+   public void setCategory(String category) {
+        this.category = category;
+   }
 
-    }
+   public String getType() {
+        return type;
+   }
 
-    public Meal(String name){
-        this.name=name;
-    }
+   public void setType(String type) {
 
-    public static Meal getMeal(String mealName,int mealCalories,LocalDateTime dateTime){
-       return new Meal(mealName);
+        this.type = type;
+   }
 
-    }
+   public String getLink() {
+        return link;
+   }
 
-    public String getMealName(){
-        return name;
-    }
-    public int getMealCalories(){
-        return calories;
-    }
-    public void setMealName(String mealName){
-        this.name=mealName;
+   public void setLink(String link) {
+        this.link = link;
+   }
 
-    }
-    public void setMealCalories(int mealCalories){
-        this.calories=mealCalories;
-    }
-    public void setMealCalories(Meal meal){
-        this.calories=meal.getCalories();
-    }
+
 
 
 
