@@ -10,5 +10,6 @@ import java.util.List;
 public interface MealRepository extends MongoRepository<Meal, String> {
     List<Meal> findByCategory(String category);
     List<Meal> findByType(String type);
+    List<Meal> findByCategoryAndType(String category, String type);
 
 }

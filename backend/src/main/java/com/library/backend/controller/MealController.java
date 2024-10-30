@@ -35,10 +35,26 @@ public class MealController {
         return ResponseEntity.ok(mealService.getMealsByCategory(category));
     }
 
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<Meal>> getMealsByType(@PathVariable String type) {
+        return ResponseEntity.ok(mealService.getMealsByType(type));
+    }
+
+    @GetMapping("/category/{category}/type/{type}")
+    public ResponseEntity<List<Meal>> getMealsByCategoryAndType(@PathVariable String category, @PathVariable String type) {
+        return ResponseEntity.ok(mealService.getMealsByCategoryAndType(category, type));
+    }
+
     @PostMapping
     public ResponseEntity<Meal> createMeal(@RequestBody Meal meal) {
         Meal createdMeal = mealService.createMeal(meal);
         return ResponseEntity.ok(createdMeal);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Meal> updateMeal(@PathVariable String id, @RequestBody Meal updatedMeal) {
+        Meal meal = mealService.updateMeal(id, updatedMeal);
+        return meal != null ? ResponseEntity.ok(meal) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
