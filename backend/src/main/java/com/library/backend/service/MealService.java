@@ -3,13 +3,17 @@ import com.library.backend.model.Meal;
 import com.library.backend.repository.MealRepository;
 
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
 
-public class MealService {
+
+
+public final class MealService {
 
     private final MealRepository mealRepository;
     public MealService(MealRepository mealRepository) {
@@ -22,20 +26,49 @@ public class MealService {
     }
 
 
-    public Meal getMealById(String id) {
+    public Meal getMealById(String id) throws Exception {
+        Meal meal = mealRepository.findById(id).orElseThrow(() -> new Exception("ID not found."));
+        meal.setIngredients(meal.getIngredients());
+
+
         return mealRepository.findById(id).orElse(null);
     }
 
-    public List<Meal> getMealsByCategory(String category) {
+     public List<Meal> getMealsByCategory(String category)  {
+        for (Meal meal : getAllMeals()) {
+            if (meal.getCategory().equals(category)) {
+                meal.setIngredients(meal.getIngredients());
+
+            }
+        }
+
         return mealRepository.findByCategory(category);
     }
 
     public List<Meal> getMealsByType(String type) {
-        return mealRepository.findByType(type);
+        List<Meal> meals = mealRepository.findByType(type);
+        if (meals.isEmpty()) {
+            return new ArrayList<Meal>();
+        }else {
+            return meals;
+        }
+
     }
 
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
-        return mealRepository.findByCategoryAndType(category, type);
+        Meal meal = mealRepository.findByCategory(category).get(1);
+        if (meal.getCategory().equals("category")) {
+            meal.setIngredients(meal.getIngredients());
+            meal.setType(type);
+            return mealRepository.findByCategory(category);
+
+        }else {
+            meal.setIngredients(meal.getIngredients());
+            meal.setType(type);
+            return mealRepository.findByCategory(category);
+
+        }
+
     }
 
     public Meal createMeal(Meal meal) {
@@ -59,7 +92,12 @@ public class MealService {
     }
 
     public void deleteMeal(String id) {
-        mealRepository.deleteById(id);
+        if (mealRepository.findById(id).isPresent()) {
+            mealRepository.deleteById(id);
+
+        }
+
+
     }
 
 

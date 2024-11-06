@@ -1,10 +1,15 @@
 package com.library.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection ="meals")
 
 public class Meal {
@@ -19,8 +24,7 @@ public class Meal {
     private String nutrition;
     private String healthBenefit;
 
-
-    public Meal() {}
+    
    public Meal(String name, String description, String category, String type, String link, List<String> ingredients, String nutrition, String healthBenefit) {
         this.name = name;
         this.description = description;

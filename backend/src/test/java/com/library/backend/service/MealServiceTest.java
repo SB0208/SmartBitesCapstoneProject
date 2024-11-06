@@ -38,7 +38,7 @@ class MealServiceTest {
     }
 
     @Test
-    void getMealById() {
+    void getMealById() throws Exception {
         Meal meal = new Meal("Salad","Light Green Salad","Recepies","Eating guides","https://example.com",null,"100 kcal","Good");
         when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
 

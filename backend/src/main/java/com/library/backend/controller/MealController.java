@@ -2,7 +2,7 @@ package com.library.backend.controller;
 import com.library.backend.model.Meal;
 import com.library.backend.service.MealService;
 
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/meals")
 
-public class MealController {
+public final class MealController {
 
     private final MealService mealService;
     public MealController(MealService mealService) {
@@ -24,7 +24,7 @@ public class MealController {
     }
 
     @GetMapping("/{id}")
-     public ResponseEntity<Meal> getMealById(@PathVariable String id) {
+     public ResponseEntity<Meal> getMealById(@PathVariable String id) throws Exception {
         Meal meal = mealService.getMealById(id);
         return meal != null ? ResponseEntity.ok(meal) : ResponseEntity.notFound().build();
 
@@ -32,7 +32,11 @@ public class MealController {
 
     @GetMapping("/category/{category}")
     public ResponseEntity<List<Meal>> getMealsByCategory(@PathVariable String category) {
-        return ResponseEntity.ok(mealService.getMealsByCategory(category));
+        try {
+            return ResponseEntity.ok(mealService.getMealsByCategory(category));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/type/{type}")
@@ -45,7 +49,12 @@ public class MealController {
         return ResponseEntity.ok(mealService.getMealsByCategoryAndType(category, type));
     }
 
-    @PostMapping
+    @GetMapping("/categories")
+    public ResponseEntity<List<Meal>> getMealsByCategory() {
+        return ResponseEntity.ok(mealService.getAllMeals());
+    }
+
+    @PostMapping("/categories/category")
     public ResponseEntity<Meal> createMeal(@RequestBody Meal meal) {
         Meal createdMeal = mealService.createMeal(meal);
         return ResponseEntity.ok(createdMeal);
