@@ -95,7 +95,7 @@ const CategoryPage: React.FC = () => {
                 </div>
 
                 <div>
-                    <label>Description:</label>
+                    <label>Description(Please add Link to the Recepie):</label>
                     <textarea
                         value={mealDescription}
                         onChange={(e) => setMealDescription(e.target.value)}

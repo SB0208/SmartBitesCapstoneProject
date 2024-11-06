@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../assets/Navbar';
+import axios from "axios";
+
+
 
 
 
@@ -17,20 +20,25 @@ interface Category {
 
 const CategoriesPage: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
+    const fetchCategories = async () => {
+        try {
+            const response = await fetch('/api/meals/categories');
+            const data = await response.json();
+            setCategories(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await fetch('/api/meals/categories');
-                const data = await response.json();
-                setCategories(data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
+
 
         fetchCategories();
     }, []);
+
+    function deleteMeal(id:string){
+        axios.delete("/api/meals/" +id).then(fetchCategories).catch(error => console.log(error))
+    }
 
     return (
         <div>
@@ -44,7 +52,9 @@ const CategoriesPage: React.FC = () => {
                             <p>{category.description}</p>
                             <p>{category.nutrition}</p>
                             <img src={category.link} alt={"bild"}/>
+
                         </Link>
+                        <button onClick={() => deleteMeal(category.id)}>Delete Meal</button>
                     </li>
                 ))}
             </ul>
