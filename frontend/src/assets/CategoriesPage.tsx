@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from '../assets/Navbar';
 import axios from "axios";
+
 
 
 
@@ -14,6 +14,7 @@ interface Category {
     description: string;
     nutrition:string;
     link:string;
+    mealLink:string;
 }
 
 
@@ -47,13 +48,12 @@ const CategoriesPage: React.FC = () => {
             <ul>
                 {categories.map((category) => (
                     <li key={category.id}>
-                        <Link to={`/category/${category.id}`}>
                             <h2>{category.name}</h2>
-                            <p>{category.description}</p>
+                            <a>{category.description}</a>
                             <p>{category.nutrition}</p>
                             <img src={category.link} alt={"bild"}/>
 
-                        </Link>
+
                         <button onClick={() => deleteMeal(category.id)}>Delete Meal</button>
                     </li>
                 ))}

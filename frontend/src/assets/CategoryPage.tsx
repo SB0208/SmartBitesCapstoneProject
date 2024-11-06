@@ -60,9 +60,9 @@ const CategoryPage: React.FC = () => {
     return (
         <div>
             <Navbar />
-            <h1> Details</h1>
+            <h1> Add New Meal</h1>
 
-            <h2>Add New Meal</h2>
+
             <form onSubmit={handleAddMeal}>
                 <div>
                     <label>Meal Name:</label>
@@ -94,8 +94,10 @@ const CategoryPage: React.FC = () => {
                     />
                 </div>
 
+
                 <div>
-                    <label>Description(Please add Link to the Recepie):</label>
+                    <label>Description:
+                    (add link for Recepie)</label>
                     <textarea
                         value={mealDescription}
                         onChange={(e) => setMealDescription(e.target.value)}
