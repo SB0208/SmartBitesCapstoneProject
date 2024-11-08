@@ -57,14 +57,17 @@ public final class MealService {
 
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
         Meal meal = mealRepository.findByCategory(category).get(1);
-        boolean category1 = meal.getCategory().equals("category");
-
+        if (meal.getCategory().equals("category")) {
             meal.setIngredients(meal.getIngredients());
             meal.setType(type);
             return mealRepository.findByCategory(category);
 
+        }else {
+            meal.setIngredients(meal.getIngredients());
+            meal.setType(type);
+            return mealRepository.findByCategory(category);
 
-
+        }
 
     }
 
@@ -80,8 +83,6 @@ public final class MealService {
             meal.setName(updatedMeal.getName());
             meal.setDescription(updatedMeal.getDescription());
             meal.setCategory(updatedMeal.getCategory());
-            meal.setType(updatedMeal.getType());
-            meal.setIngredients(updatedMeal.getIngredients());
             meal.setNutrition(updatedMeal.getNutrition());
             meal.setHealthBenefit(updatedMeal.getHealthBenefit());
             return mealRepository.save(meal);
