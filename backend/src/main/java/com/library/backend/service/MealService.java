@@ -57,18 +57,14 @@ public final class MealService {
 
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
         Meal meal = mealRepository.findByCategory(category).get(1);
-        switch (meal.getCategory()) {
-            case "category" -> {
-                meal.setIngredients(meal.getIngredients());
-                meal.setType(type);
-                return mealRepository.findByCategory(category);
-            }
-            default -> {
-                meal.setIngredients(meal.getIngredients());
-                meal.setType(type);
-                return mealRepository.findByCategory(category);
-            }
-        }
+        boolean category1 = meal.getCategory().equals("category");
+
+            meal.setIngredients(meal.getIngredients());
+            meal.setType(type);
+            return mealRepository.findByCategory(category);
+
+
+
 
     }
 
