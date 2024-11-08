@@ -3,7 +3,7 @@ import com.library.backend.model.Meal;
 import com.library.backend.repository.MealRepository;
 
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public final class MealService {
     public List<Meal> getMealsByType(String type) {
         List<Meal> meals = mealRepository.findByType(type);
         if (meals.isEmpty()) {
-            return new ArrayList<Meal>();
+            return new ArrayList<>();
         }else {
             return meals;
         }
@@ -57,16 +57,17 @@ public final class MealService {
 
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
         Meal meal = mealRepository.findByCategory(category).get(1);
-        if (meal.getCategory().equals("category")) {
-            meal.setIngredients(meal.getIngredients());
-            meal.setType(type);
-            return mealRepository.findByCategory(category);
-
-        }else {
-            meal.setIngredients(meal.getIngredients());
-            meal.setType(type);
-            return mealRepository.findByCategory(category);
-
+        switch (meal.getCategory()) {
+            case "category" -> {
+                meal.setIngredients(meal.getIngredients());
+                meal.setType(type);
+                return mealRepository.findByCategory(category);
+            }
+            default -> {
+                meal.setIngredients(meal.getIngredients());
+                meal.setType(type);
+                return mealRepository.findByCategory(category);
+            }
         }
 
     }
