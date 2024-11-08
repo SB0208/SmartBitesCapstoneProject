@@ -60,7 +60,10 @@ class MealServiceTest {
 
     @Test
     void testDeleteMeal() {
+        when(mealRepository.findById("1")).thenReturn(Optional.of(new Meal()));
+
         mealService.deleteMeal("1");
+        verify(mealRepository, times(1)).findById("1");
         verify(mealRepository, times(1)).deleteById("1");
     }
 
