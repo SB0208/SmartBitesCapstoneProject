@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Arrays;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -60,11 +60,28 @@ class MealServiceTest {
 
     @Test
     void testDeleteMeal() {
-        when(mealRepository.findById("1")).thenReturn(Optional.of(new Meal()));
+        // Use an appropriate constructor or builder if available
+        Meal meal = new Meal("1", "Meal1", "Description", "Category", "Type", null, null, null);
+
+        // Mocking the findById behavior to return our correctly constructed Meal instance
+        when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
+
+        // Call the delete method
+        mealService.deleteMeal("1");
+
+        // Verify that findById and deleteById were called with the correct arguments
+        verify(mealRepository, times(1)).findById("1");
+        verify(mealRepository, times(1)).deleteById("1");
+    }
+
+
+    @Test
+    void testDeleteMealNotFound() {
+        when(mealRepository.findById("1")).thenReturn(Optional.empty());
 
         mealService.deleteMeal("1");
         verify(mealRepository, times(1)).findById("1");
-        verify(mealRepository, times(1)).deleteById("1");
+        verify(mealRepository, times(0)).deleteById("1");
     }
 
 }
