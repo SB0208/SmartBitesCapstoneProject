@@ -11,6 +11,7 @@ interface Meal {
     nutrition:string;
     link: string;
     description: string;
+    type:string;
 }
 
 
@@ -23,6 +24,7 @@ const CategoryPage: React.FC = () => {
     const [mealNutrition, setMealNutrition] = useState('');
     const [mealLink, setMealLink] = useState('');
     const [mealDescription, setMealDescription] = useState('');
+
 
 
     useEffect(() => {
@@ -46,6 +48,7 @@ const CategoryPage: React.FC = () => {
             nutrition: mealNutrition,
             link: mealLink,
             description: mealDescription,
+
         };
 
         try {
@@ -75,7 +78,7 @@ const CategoryPage: React.FC = () => {
                 </div>
 
                 <div>
-                    <label>Nutrition:</label>
+                    <label>kcal/info:</label>
                     <input
                         type="text"
                         value={mealNutrition}
@@ -83,6 +86,7 @@ const CategoryPage: React.FC = () => {
                         required
                     />
                 </div>
+
 
                 <div>
                     <label>Link for Picture:</label>
@@ -96,8 +100,7 @@ const CategoryPage: React.FC = () => {
 
 
                 <div>
-                    <label>Description:
-                    (add link for Recepie)</label>
+                    <label>link for Recepie/Info</label>
                     <textarea
                         value={mealDescription}
                         onChange={(e) => setMealDescription(e.target.value)}
