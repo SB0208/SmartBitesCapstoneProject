@@ -59,15 +59,35 @@ class MealServiceTest {
     }
 
     @Test
-    void testCreateMeal() {
+    void testCreateMeal_shouldReturnSavedMeal() {
         Meal meal = new Meal("Salad", "Recipes", "Category", "Type", "http://test.com", "100 kcal");
 
         when(mealRepository.save(meal)).thenReturn(meal);
 
         Meal createdMeal = mealService.createMeal(meal);
 
-        assertNotNull(createdMeal);
-        assertEquals("Salad", createdMeal.getName());
+        assertNotNull(createdMeal,"Das zurückgegebene Meal sollte nicht null sein.");
+        assertEquals("Salad", createdMeal.getName(),"Der Name des Meal sollte 'Salad' sein.");
+        verify(mealRepository, times(1)).save(meal);
+    }
+
+    @Test
+    void createMeal_shouldThrowExceptionWhenNameIsNull() {
+        Meal meal = new Meal(null, "Healthy salad", "Vegetable", "Lunch", "http://saladrecipe.com", "220 kcal");
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> mealService.createMeal(meal));
+        assertEquals("Meal name cannot be null or empty", exception.getMessage());
+        verify(mealRepository, never()).save(any(Meal.class));
+    }
+
+    @Test
+    void createMeal_shouldThrowExceptionWhenNameIsEmpty() {
+        // Arrange
+        Meal meal = new Meal("", "Healthy salad", "Vegetable", "Lunch", "http://saladrecipe.com", "220 kcal");
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> mealService.createMeal(meal));
+        assertEquals("Meal name cannot be null or empty", exception.getMessage());
+        verify(mealRepository, never()).save(any(Meal.class));
     }
 
     @Test

@@ -52,13 +52,11 @@ public final class MealService {
         }else {
             return meals;
         }
-
     }
 
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
         List<Meal> getMealsByCategory = mealRepository.findByCategoryAndType(category, type);
         return mealRepository.findByCategoryAndType(category, type);
-
     }
 
     public Meal createMeal(Meal meal) {
