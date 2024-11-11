@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,14 +22,13 @@ public class Meal {
     private String healthBenefit;
 
     
-   public Meal(String name, String description, String category, String type, String link, String nutrition, String healthBenefit) {
+   public Meal(String name, String description, String category, String type, String link, String nutrition, String s) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.type = type;
         this.link = link;
        this.nutrition = nutrition;
-       this.healthBenefit = healthBenefit;
    }
    public String getId() {
         return id;

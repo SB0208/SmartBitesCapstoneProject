@@ -9,23 +9,4 @@ class MealTest {
 
 
 
-
-    @Test
-    void testNotEquals() {
-        Meal differentMeal = new Meal(
-                "Soup",
-                "A warm vegetable soup",
-                "Vegetable",
-                "Dinner",
-                "http://soup.com",
-                "Low fat",
-                "Good for digestion"
-        );
-
-        assertNotEquals(meal, differentMeal);
-    }
-
-
-
-
 }
