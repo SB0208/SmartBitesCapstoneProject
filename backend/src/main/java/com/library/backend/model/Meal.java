@@ -1,8 +1,13 @@
 package com.library.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection ="meals")
 
 public class Meal {
@@ -13,14 +18,16 @@ public class Meal {
     private String category;
     private String type;
     private String link;
+    private String nutrition;
 
-    public Meal() {}
-   public Meal(String name, String description, String category, String type, String link) {
-        this.name = name;
+    
+   public Meal(String name, String description, String category, String type, String link, String nutrition) {
+       this.name = name;
         this.description = description;
         this.category = category;
         this.type = type;
         this.link = link;
+       this.nutrition = nutrition;
    }
    public String getId() {
         return id;
@@ -71,6 +78,17 @@ public class Meal {
    public void setLink(String link) {
         this.link = link;
    }
+
+
+    public String getNutrition() {
+        return nutrition;
+    }
+
+    public void setNutrition(String nutrition) {
+        this.nutrition = nutrition;
+    }
+
+
 
 
 
