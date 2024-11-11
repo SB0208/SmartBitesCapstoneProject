@@ -91,6 +91,32 @@ class MealControllerTest {
         verify(mealService, times(1)).getMealsByCategory("Vegetable");
     }
 
+    @Test
+    void getMealsByCategory_shouldReturnEmptyList() throws Exception {
+        when(mealService.getMealsByCategory("UnknownCategory")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/meals/category/UnknownCategory")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(0)));
+
+        verify(mealService, times(1)).getMealsByCategory("UnknownCategory");
+    }
+
+    @Test
+    void getMealsByCategory_shouldHandleException() throws Exception {
+        // Wenn die Service-Methode eine Exception wirft
+        when(mealService.getMealsByCategory("Vegetable")).thenThrow(new RuntimeException("Internal Server Error"));
+
+        // Durchführung der Anfrage und Überprüfung auf Fehlerstatus 500
+        mockMvc.perform(get("/api/meals/category/Vegetable")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError())  // Überprüfung des 500-Fehlerstatus
+                .andExpect(content().string("Internal Server Error"));  // Optional: Überprüfung der Fehlermeldung im Response Body
+
+        verify(mealService, times(1)).getMealsByCategory("Vegetable");
+    }
+
 
 
     @Test
@@ -135,17 +161,6 @@ class MealControllerTest {
         verify(mealService, times(1)).getMealsByCategoryAndType("Vegetable", "Lunch");
     }
 
-    @Test
-    void getMealsByCategory_shouldReturnEmptyList() throws Exception {
-        when(mealService.getMealsByCategory("UnknownCategory")).thenReturn(Collections.emptyList());
-
-        mockMvc.perform(get("/api/meals/category/UnknownCategory")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
-
-        verify(mealService, times(1)).getMealsByCategory("UnknownCategory");
-    }
 
     @Test
     void deleteMeal_shouldReturnNoContent() throws Exception {

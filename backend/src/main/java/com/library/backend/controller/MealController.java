@@ -35,8 +35,13 @@ public final class MealController {
         try {
             return ResponseEntity.ok(mealService.getMealsByCategory(category));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new  RuntimeException("Internal Server Error", e);
         }
+    }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        // Hier kannst du die Nachricht und den Statuscode anpassen
+        return ResponseEntity.status(500).body(ex.getMessage());
     }
 
 
