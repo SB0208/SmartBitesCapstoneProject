@@ -28,7 +28,7 @@ public final class MealService {
 
     public Meal getMealById(String id) throws Exception {
         Meal meal = mealRepository.findById(id).orElseThrow(() -> new Exception("ID not found."));
-        meal.setIngredients(meal.getIngredients());
+
 
 
         return mealRepository.findById(id).orElse(null);
@@ -37,7 +37,7 @@ public final class MealService {
      public List<Meal> getMealsByCategory(String category)  {
         for (Meal meal : getAllMeals()) {
             if (meal.getCategory().equals(category)) {
-                meal.setIngredients(meal.getIngredients());
+
 
             }
         }
@@ -58,12 +58,12 @@ public final class MealService {
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
         Meal meal = mealRepository.findByCategory(category).get(1);
         if (meal.getCategory().equals("category")) {
-            meal.setIngredients(meal.getIngredients());
+
             meal.setType(type);
             return mealRepository.findByCategory(category);
 
         }else {
-            meal.setIngredients(meal.getIngredients());
+
             meal.setType(type);
             return mealRepository.findByCategory(category);
 

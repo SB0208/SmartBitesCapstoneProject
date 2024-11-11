@@ -20,18 +20,16 @@ public class Meal {
     private String category;
     private String type;
     private String link;
-    private List<String> ingredients;
     private String nutrition;
     private String healthBenefit;
 
     
-   public Meal(String name, String description, String category, String type, String link, List<String> ingredients, String nutrition, String healthBenefit) {
+   public Meal(String name, String description, String category, String type, String link, String nutrition, String healthBenefit) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.type = type;
         this.link = link;
-       this.ingredients = ingredients;
        this.nutrition = nutrition;
        this.healthBenefit = healthBenefit;
    }
@@ -85,14 +83,6 @@ public class Meal {
         this.link = link;
    }
 
-
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
 
     public String getNutrition() {
         return nutrition;

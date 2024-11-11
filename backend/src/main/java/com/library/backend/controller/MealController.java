@@ -39,10 +39,6 @@ public final class MealController {
         }
     }
 
-    @GetMapping("/type/category")
-    public ResponseEntity<List<Meal>> getMealsByType(@PathVariable String type) {
-        return ResponseEntity.ok(mealService.getMealsByType(type));
-    }
 
     @GetMapping("/category/{category}/type/{type}")
     public ResponseEntity<List<Meal>> getMealsByCategoryAndType(@PathVariable String category, @PathVariable String type) {

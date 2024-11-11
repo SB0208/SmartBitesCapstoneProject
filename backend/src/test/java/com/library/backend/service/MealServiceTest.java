@@ -39,7 +39,7 @@ class MealServiceTest {
 
     @Test
     void getMealById() throws Exception {
-        Meal meal = new Meal("Salad","Light Green Salad","Recepies","Eating guides","https://example.com",null,"100 kcal","Good");
+        Meal meal = new Meal("Salad","Salad","Recepies","Eating guides","https://example.com",null,"100 kcal","Good");
         when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
 
 
@@ -51,7 +51,7 @@ class MealServiceTest {
 
    @Test
     void testCreateMeal() {
-        Meal meal = new Meal("Salad","Light Green Salad","Recepies","Eating guides","https://example.com",null,"100 kcal","Good");
+        Meal meal = new Meal("Salad","Salad","Recepies","Eating guides","https://example.com",null,"100 kcal","Good");
         when(mealRepository.save(meal)).thenReturn(meal);
         Meal createdMeal = mealService.createMeal(meal);
         assertNotNull(createdMeal);
