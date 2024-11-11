@@ -110,5 +110,62 @@ class MealServiceTest {
         assertEquals("Salad", meals.get(0).getName());
     }
 
+    @Test
+    void testUpdateMeal() {
+
+        MealRepository mealRepository = mock(MealRepository.class);
+
+
+        MealService mealService = new MealService(mealRepository);
+
+
+        Meal existingMeal = new Meal("Old Salad", "Old Description", "Old Category", "Old Type", "http://old-link.com","100 kcal");
+
+
+        Meal updatedMeal = new Meal("New Salad", "Fresh vegetables", "Vegan", "Lunch", "http://new-link.com","50 kcal");
+
+
+        when(mealRepository.findById("1")).thenReturn(Optional.of(existingMeal));
+        when(mealRepository.save(any(Meal.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+
+        Meal result = mealService.updateMeal("1", updatedMeal);
+
+
+        assertNotNull(result, "Das aktualisierte Meal-Objekt sollte nicht null sein.");
+        assertEquals("New Salad", result.getName(), "Der Name sollte aktualisiert sein.");
+        assertEquals("Fresh vegetables", result.getDescription(), "Die Beschreibung sollte aktualisiert sein.");
+        assertEquals("Vegan", result.getCategory(), "Die Kategorie sollte aktualisiert sein.");
+        assertEquals("50 kcal", result.getNutrition(), "Die Nährwertangabe sollte aktualisiert sein.");
+
+        // Sicherstellen, dass die save-Methode im Repository aufgerufen wurde
+        verify(mealRepository, times(1)).save(existingMeal);
+    }
+
+    @Test
+    void testUpdateMealNotFound() {
+
+        MealRepository mealRepository = mock(MealRepository.class);
+
+
+        MealService mealService = new MealService(mealRepository);
+
+
+        Meal updatedMeal = new Meal("Spinat","Vegetable","Vegetables","type","www.test.com","200kcal");
+
+
+        when(mealRepository.findById("1")).thenReturn(Optional.empty());
+
+
+        Meal result = mealService.updateMeal("1", updatedMeal);
+
+
+        assertNull(result, "Das Ergebnis sollte null sein, wenn kein Meal mit der gegebenen ID gefunden wird.");
+
+
+        verify(mealRepository, times(0)).save(any(Meal.class));
+    }
+
+
 
 }
