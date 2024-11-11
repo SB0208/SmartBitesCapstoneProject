@@ -61,16 +61,35 @@ public final class MealController {
         return ResponseEntity.ok(createdMeal);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Meal> updateMeal(@PathVariable String id, @RequestBody Meal updatedMeal) {
-        Meal meal = mealService.updateMeal(id, updatedMeal);
-        return meal != null ? ResponseEntity.ok(meal) : ResponseEntity.notFound().build();
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMeal(@PathVariable String id) {
         mealService.deleteMeal(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Meal> updateMeal(@PathVariable String id, @RequestBody Meal updatedMeal) {
+        Meal meal = mealService.updateMeal(id, updatedMeal);
+        return meal != null ? ResponseEntity.ok(filterMealFields(meal)) : ResponseEntity.notFound().build();
+    }
+
+
+
+    private Meal filterMealFields(Meal meal) {
+        if (meal == null) {
+            return null;
+        }
+        // Erstellen Sie eine neue Instanz von Meal und kopieren nur die gewünschten Felder
+        Meal filteredMeal = new Meal();
+        filteredMeal.setName(meal.getName());
+        filteredMeal.setDescription(meal.getDescription());
+        filteredMeal.setCategory(meal.getCategory());
+        filteredMeal.setType(meal.getType());
+        filteredMeal.setLink(meal.getLink());
+        filteredMeal.setNutrition(meal.getNutrition());
+
+        return filteredMeal;
     }
 
 
