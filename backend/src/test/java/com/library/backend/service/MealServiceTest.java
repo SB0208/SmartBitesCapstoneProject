@@ -28,8 +28,8 @@ class MealServiceTest {
 
     @Test
     void testGetAllMeals() {
-        Meal meal1 =new Meal("Salad","Light Green Salad","Recepies","Eating guides","https://example.com",null,"100 kcal");
-       Meal meal2 = new Meal("Smoothie","Fresh Fruit Smoothie","Recepies","Eating guides","https://example.com",null,"200 kcal");
+        Meal meal1 =new Meal("Salad","Light Green Salad","Recepies","Eating guides","Type","www.test.com","100 kcal");
+       Meal meal2 = new Meal("Smoothie","Fresh Fruit Smoothie","Recepies","Eating guides","Type","www.test.com","200 kcal");
 
        when(mealRepository.findAll()).thenReturn(List.of(meal1,meal2));
        List<Meal> meals = mealService.getAllMeals();
@@ -39,7 +39,7 @@ class MealServiceTest {
 
     @Test
     void getMealById() throws Exception {
-        Meal meal = new Meal("Salad","Salad","Recepies","Eating guides","https://example.com",null,"100 kcal");
+        Meal meal = new Meal("Salad","Salad","Recepies","Eating guides","Type","www.test.com","100 kcal");
         when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
 
 
@@ -61,7 +61,7 @@ class MealServiceTest {
     @Test
     void testDeleteMeal() {
         // Use an appropriate constructor or builder if available
-        Meal meal = new Meal("1", "Meal1", "Description", "Category", "Type", "www.test.com", "100 kcal");
+        Meal meal = new Meal("1","Meal1","Description","Category","Type","www.test.com","100 kcal");
 
         // Mocking the findById behavior to return our correctly constructed Meal instance
         when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
