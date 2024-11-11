@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -37,7 +38,7 @@ class MealControllerTest {
 
     @BeforeEach
     void setUp() {
-        meal = new Meal("Salad","Healthy salad","Vegetable","Lunch","http://saladrecipe.com","Low calories");
+        meal = new Meal("Salad","Healthy salad","Vegetable","Lunch","http://saladrecipe.com","220 kcal");
         mealList = Arrays.asList(meal);
     }
 
@@ -116,6 +117,34 @@ class MealControllerTest {
                 .andExpect(jsonPath("$.name", is(meal.getName())));
 
         verify(mealService, times(1)).updateMeal(eq("1"), any(Meal.class));
+    }
+
+
+    @Test
+    void getMealsByCategoryAndType_shouldReturnFilteredMealList() throws Exception {
+        // Mocking MealService to return the filtered list
+        when(mealService.getMealsByCategoryAndType("Vegetable", "Lunch")).thenReturn(mealList);
+
+        mockMvc.perform(get("/api/meals/category/Vegetable/type/Lunch")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].category", is(meal.getCategory())))
+                .andExpect(jsonPath("$[0].type", is(meal.getType())));
+
+        verify(mealService, times(1)).getMealsByCategoryAndType("Vegetable", "Lunch");
+    }
+
+    @Test
+    void getMealsByCategory_shouldReturnEmptyList() throws Exception {
+        when(mealService.getMealsByCategory("UnknownCategory")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/meals/category/UnknownCategory")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(0)));
+
+        verify(mealService, times(1)).getMealsByCategory("UnknownCategory");
     }
 
     @Test
