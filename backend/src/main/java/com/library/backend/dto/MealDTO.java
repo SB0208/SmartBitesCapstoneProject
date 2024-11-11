@@ -51,7 +51,6 @@ public class MealDTO {
     }
 
 
-
     public String getNutrition() {
         return nutrition;
     }
@@ -67,4 +66,5 @@ public class MealDTO {
     public void setLink(String link) {
         this.link = link;
     }
+}
 
