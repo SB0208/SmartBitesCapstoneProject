@@ -43,7 +43,7 @@ public class BackendApplicationTests {
     @Test
     public void testMealServiceGetAllMeals() {
         // Add a sample meal
-        Meal meal = new Meal("2", "Another Meal", "Description", "Category", "Type", "www.test.com", "220kcal", null);
+        Meal meal = new Meal("2", "Another Meal", "Description", "Category", "Type", "www.test.com", "220kcal");
         mealRepository.save(meal);
 
         // Call the service method to get all meals and check that the list is not empty
