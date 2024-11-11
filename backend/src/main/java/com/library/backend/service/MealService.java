@@ -84,7 +84,6 @@ public final class MealService {
             meal.setDescription(updatedMeal.getDescription());
             meal.setCategory(updatedMeal.getCategory());
             meal.setNutrition(updatedMeal.getNutrition());
-            meal.setHealthBenefit(updatedMeal.getHealthBenefit());
             return mealRepository.save(meal);
         }).orElse(null);
     }
