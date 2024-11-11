@@ -39,7 +39,7 @@ class MealServiceTest {
     }
 
     @Test
-    void getMealById() throws Exception {
+    void getMealById_schouldReturnMeal() throws Exception {
         Meal meal = new Meal("Salad", "Recipes", "Eating guides", "Type", "http://test.com", "100 kcal");
         when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
 
@@ -47,6 +47,14 @@ class MealServiceTest {
 
         assertNotNull(foundMeal);
         assertEquals("Salad", foundMeal.getName());
+    }
+
+    @Test
+    void getMealById_shouldThrowExceptionWhenNotFound() {
+        when(mealRepository.findById("1")).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(Exception.class, () -> mealService.getMealById("1"));
+        assertEquals("ID not found.", exception.getMessage());
     }
 
     @Test
@@ -110,6 +118,8 @@ class MealServiceTest {
         assertEquals("Salad", meals.get(0).getName());
     }
 
+
+
     @Test
     void testUpdateMeal() {
 
@@ -165,7 +175,5 @@ class MealServiceTest {
 
         verify(mealRepository, times(0)).save(any(Meal.class));
     }
-
-
 
 }
