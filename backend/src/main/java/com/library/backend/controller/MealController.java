@@ -1,5 +1,4 @@
 package com.library.backend.controller;
-import com.library.backend.dto.MealDTO;
 import com.library.backend.model.Meal;
 import com.library.backend.service.MealService;
 
@@ -63,9 +62,9 @@ public final class MealController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MealDTO> updateMeal(@PathVariable String id, @RequestBody Meal updatedMeal) {
+    public ResponseEntity<Meal> updateMeal(@PathVariable String id, @RequestBody Meal updatedMeal) {
         Meal meal = mealService.updateMeal(id, updatedMeal);
-        return meal != null ? ResponseEntity.ok(convertToDTO(meal)) : ResponseEntity.notFound().build();
+        return meal != null ? ResponseEntity.ok(meal) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
@@ -73,16 +72,7 @@ public final class MealController {
         mealService.deleteMeal(id);
         return ResponseEntity.noContent().build();
     }
-    private MealDTO convertToDTO(Meal meal) {
-        return new MealDTO(
-                meal.getName(),
-                meal.getDescription(),
-                meal.getCategory(),
-                meal.getType(),
-                meal.getLink(),
-                meal.getNutrition()
-        );
-    }
+
 
 
 
