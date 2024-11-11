@@ -51,7 +51,7 @@ class MealServiceTest {
 
    @Test
     void testCreateMeal() {
-        Meal meal = new Meal("Salad","Salad","Recepies","Eating guides","https://example.com",null,"100 kcal");
+        Meal meal = new Meal("Salad","Salad","Recepies","Eating guides","Type","www.test.com","100 kcal");
         when(mealRepository.save(meal)).thenReturn(meal);
         Meal createdMeal = mealService.createMeal(meal);
         assertNotNull(createdMeal);
@@ -61,7 +61,7 @@ class MealServiceTest {
     @Test
     void testDeleteMeal() {
         // Use an appropriate constructor or builder if available
-        Meal meal = new Meal("1", "Meal1", "Description", "Category", "Type", null, null);
+        Meal meal = new Meal("1", "Meal1", "Description", "Category", "Type", "www.test.com", "100 kcal");
 
         // Mocking the findById behavior to return our correctly constructed Meal instance
         when(mealRepository.findById("1")).thenReturn(Optional.of(meal));
