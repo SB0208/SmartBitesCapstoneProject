@@ -39,7 +39,7 @@ class MealControllerTest {
     @BeforeEach
     void setUp() {
         meal = new Meal("1", "Salad", "Healthy salad", "Vegetable", "Lunch", "http://saladrecipe.com",
-                 "Low calories", "Rich in vitamins");
+                 "Low calories");
         mealList = Arrays.asList(meal);
     }
 
