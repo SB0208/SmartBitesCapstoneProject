@@ -38,7 +38,7 @@ class MealControllerTest {
 
     @BeforeEach
     void setUp() {
-        meal = new Meal("1", "Salad", "Healthy salad", "Vegetable", "Lunch", "http://saladrecipe.com","Low calories");
+        meal = new Meal("1","Salad","Healthy salad","Vegetable","Lunch","http://saladrecipe.com","Low calories");
         mealList = Arrays.asList(meal);
     }
 
