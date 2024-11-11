@@ -36,6 +36,7 @@ public final class MealController {
             return ResponseEntity.ok(mealService.getMealsByCategory(category));
         } catch (Exception e) {
             throw new  RuntimeException("Internal Server Error", e);
+
         }
     }
     @ExceptionHandler(RuntimeException.class)
