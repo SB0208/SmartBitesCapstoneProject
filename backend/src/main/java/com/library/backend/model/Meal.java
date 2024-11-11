@@ -22,7 +22,7 @@ public class Meal {
 
     
    public Meal(String name, String description, String category, String type, String link, String nutrition) {
-        this.name = name;
+       this.name = name;
         this.description = description;
         this.category = category;
         this.type = type;

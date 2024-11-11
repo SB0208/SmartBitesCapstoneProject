@@ -11,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,7 +37,7 @@ class MealControllerTest {
 
     @BeforeEach
     void setUp() {
-        meal = new Meal("1","Salad","Healthy salad","Vegetable","Lunch","http://saladrecipe.com","Low calories");
+        meal = new Meal("Salad","Healthy salad","Vegetable","Lunch","http://saladrecipe.com","Low calories");
         mealList = Arrays.asList(meal);
     }
 
