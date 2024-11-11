@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,7 +119,35 @@ class MealServiceTest {
         assertEquals("Salad", meals.get(0).getName());
     }
 
+    @Test
+    void testGetMealsByCategoryAndType() {
+        MealRepository mealRepositoryMock = mock(MealRepository.class);
 
+
+        MealService mealService = new MealService(mealRepositoryMock);
+
+
+        Meal meal1 = new Meal("Pizza","Vegetarian","category","type","www.test.com","300 kcal");
+        Meal meal2 = new Meal("Pasta","Vegetarian","categori","types","www.test.com","308 kcal");
+        List<Meal> mealList = new ArrayList<>();
+        mealList.add(meal1);
+        mealList.add(meal2);
+
+
+        when(mealRepositoryMock.findByCategoryAndType("category", "type")).thenReturn(mealList);
+
+
+        List<Meal> meals = mealService.getMealsByCategoryAndType("category", "type");
+
+
+        assertNotNull(meals);
+        assertEquals(2, meals.size());
+        assertEquals("Pizza", meals.get(0).getName());
+        assertEquals("Pasta", meals.get(1).getName());
+
+
+        verify(mealRepositoryMock, times(2)).findByCategoryAndType("category", "type");
+    }
 
     @Test
     void testUpdateMeal() {

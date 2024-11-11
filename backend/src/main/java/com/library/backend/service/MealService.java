@@ -56,18 +56,8 @@ public final class MealService {
     }
 
     public List<Meal> getMealsByCategoryAndType(String category, String type) {
-        Meal meal = mealRepository.findByCategory(category).get(1);
-        if (meal.getCategory().equals("category")) {
-
-            meal.setType(type);
-            return mealRepository.findByCategory(category);
-
-        }else {
-
-            meal.setType(type);
-            return mealRepository.findByCategory(category);
-
-        }
+        List<Meal> getMealsByCategory = mealRepository.findByCategoryAndType(category, type);
+        return mealRepository.findByCategoryAndType(category, type);
 
     }
 
