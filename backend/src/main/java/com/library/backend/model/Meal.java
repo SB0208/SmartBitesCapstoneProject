@@ -19,10 +19,9 @@ public class Meal {
     private String type;
     private String link;
     private String nutrition;
-    private String healthBenefit;
 
     
-   public Meal(String name, String description, String category, String type, String link, String nutrition, String s) {
+   public Meal(String name, String description, String category, String type, String link, String nutrition) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -89,13 +88,7 @@ public class Meal {
         this.nutrition = nutrition;
     }
 
-    public String getHealthBenefit() {
-        return healthBenefit;
-    }
 
-    public void setHealthBenefit(String healthBenefit) {
-        this.healthBenefit = healthBenefit;
-    }
 
 
 
